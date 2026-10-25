@@ -1,23 +1,17 @@
-# Fitstify — clickable prototype
+# Fitstify prototype
 
-A responsive, single-file prototype for a fashion catalog discovery platform.
+A browser-only prototype for the Fitstify fashion catalog community.
 
 ## Run it
-- Open `index.html` in a modern browser, or deploy this folder to a static host such as Vercel.
-- No build step or package install is required.
+Open `index.html` in a modern browser. The `fitstify-icon.svg` file provides the browser tab icon.
 
 ## Included in this prototype
-- Editorial black/white/neutral design with responsive mobile layout
-- Discovery grid, tag filters, text/hashtag search
-- Create catalogs with title, description, cover image URL, tags, visibility label, and one optional first item
-- Public / unlisted / private visibility labels
-- Likes and a liked-catalogs view
-- My catalogs view and catalog detail pages
-- Browser-local persistence using `localStorage`
-- Basic URL scheme validation for submitted URLs
+- Discover and search sample public catalogs
+- Create local catalogs with public, unlisted, or private labels
+- Like catalogs and browse your own/liked catalogs
+- Dark mode by default, with a light-mode toggle
+- Catalog details open in an overlay popup
+- Import a legacy Shopper JSON backup (`{ "products": [...] }`) into one of your own catalogs, including embedded product images
 
-## Important limitations before public launch
-This is a front-end prototype, not a production social network. Catalogs and likes are stored only in the current browser and do not sync across devices. There is no real authentication, database, server-side authorization, secure private/unlisted access, image moderation, pornography detection, abuse reporting, admin review queue, or rate limiting. Demo catalogs use externally hosted Unsplash images. Private visibility is only a demo label and must not be treated as secure. Do not use it for sensitive content.
-
-## Recommended production next step
-Build a Next.js + TypeScript app backed by Supabase Auth, Postgres, and Storage. Enforce catalog access in server/database policies (RLS), keep private catalogs out of public search, add authenticated likes, server-side image/link screening, reporting and moderation tools, and test policies before publishing.
+## Important limitations
+This is a local front-end prototype. It does not have real user accounts, cross-device syncing, server-side privacy enforcement, moderation services, or production-grade storage. Visibility labels are UI-only until a backend with authorization is implemented. Data and imported images are saved in browser local storage, which has size limits.
