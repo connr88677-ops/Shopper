@@ -1,15 +1,32 @@
-# Fitstify prototype
+# Fitstify
 
-A local, browser-only prototype for fashion catalogs. Open `index.html` in a browser.
+Fitstify is a fashion-catalog community: collect pieces, build catalogs, and discover other people's style.
 
-## Current prototype features
-- Dark mode by default, with a theme toggle.
-- Create public, unlisted, and private-labeled catalogs locally.
-- Upload catalog cover images and a first clothing item image.
-- Click a clothing image to open its product link when one is provided.
-- Import catalog JSON backups and export an individual catalog as JSON.
-- Trending tags are derived from catalogs in the current browser.
-- No seeded example catalogs; the discovery page starts empty until you add catalogs.
+## Stack
+- Next.js App Router + TypeScript
+- Supabase Auth, Postgres, Row Level Security, and Storage
+- Vercel deployment
 
-## Important limitations
-This is a local prototype, not a public multi-user service. Catalogs are stored in this browser's localStorage; uploaded images are embedded in that browser's data and can make storage fill up. Private visibility is not secure access control. Do not use for real private content. A production version needs authenticated users, database/storage, server-side authorization, and moderation.
+## Local setup
+1. Install Node.js 20 or newer.
+2. Run `npm install`.
+3. Copy `.env.example` to `.env.local`.
+4. Create a Supabase project and add its project URL and anon/public key to `.env.local`.
+5. In Supabase SQL Editor, run all of `supabase/schema.sql`.
+6. In Supabase Authentication settings, set your Site URL and add your Vercel domain to the allowed redirect URLs.
+7. Run `npm run dev`.
+
+Only use the Supabase anon/public key in `NEXT_PUBLIC_*` variables. Never put a service-role key in browser code or commit secrets.
+
+## Current implementation status
+This branch introduces the Next.js application foundation, account signup/sign-in, catalog creation, public discovery, likes, image uploads, and the initial database schema. The original browser-only prototype remains at `index.html` for reference and is not the production app entry point.
+
+## Security and launch checklist
+- Row Level Security protects private catalogs and owner-only writes.
+- Public and unlisted catalogs are readable by link; only public catalogs should be shown in discovery.
+- Image uploads are limited to authenticated users' own storage folders.
+- Before a public launch, add email verification, abuse-report review/moderation operations, rate limits, terms/privacy pages, and automated tests.
+- Configure Supabase Auth redirect URLs for both localhost and the final Vercel domain.
+- Test the production build and auth flow after adding Supabase environment variables.
+
+Never put a Supabase service-role key in browser code or commit secrets.
